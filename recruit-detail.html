@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入我们 - 2025校园招聘 | 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        /* 顶部banner */
+        .recruit-banner {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.9)), url('https://picsum.photos/1920/1080?random=900');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .banner-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeUp 1s ease;
+        }
+        .banner-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeUp 1.2s ease;
+        }
+        .banner-btn {
+            padding: 12px 30px;
+            background-color: white;
+            color: #003366;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: fadeUp 1.5s ease;
+        }
+        .banner-btn:hover {
+            background-color: #e7f5ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        /* 企业介绍区 */
+        .company-intro {
+            padding: 80px 0;
+            background-color: #f9fafb;
+        }
+        .intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .intro-text h2 {
+            font-size: 2rem;
+            color: #003366;
+            margin-bottom: 20px;
+        }
+        .intro-text p {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .intro-img {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .intro-img img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s;
+        }
+        .intro-img:hover img {
+            transform: scale(1.05);
+        }
+        /* 岗位分类区 */
+        .job-category {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2rem;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            padding: 8px 20px;
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-tab.active, .category-tab:hover {
+            background-color: #003366;
+            color: white;
+            border-color: #003366;
+        }
+        /* 岗位卡片 */
+        .job-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .job-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-top: 4px solid #003366;
+        }
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .job-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .job-info {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .job-info-item {
+            display: flex;
+            align-items: center;
+        }
+        .job-info-item i {
+            margin-right: 5px;
+            color: #003366;
+        }
+        .job-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .job-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #003366;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .job-btn:hover {
+            background-color: #004080;
+            color: white;
+        }
+        /* 应聘指南 */
+        .apply-guide {
+            padding: 80px 0;
+            background-color: #f9fafb;
+            margin-top: 80px;
+        }
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .guide-step {
+            text-align: center;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: #003366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .step-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .intro-container { grid-template-columns: 1fr; }
+            .job-list { grid-template-columns: repeat(2, 1fr); }
+            .guide-steps { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .banner-title { font-size: 2rem; }
+            .job-list { grid-template-columns: 1fr; }
+            .guide-steps { grid-template-columns: 1fr; }
+        }
+        /* 动画 */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #003366;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="recruit-detail.html">加入我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 顶部Banner -->
+    <div class="recruit-banner">
+        <div class="banner-content">
+            <h1 class="banner-title">2025校园招聘</h1>
+            <p class="banner-subtitle">加入1991科技，一起用技术赋能工业物联网未来</p>
+            <button class="banner-btn" onclick="document.getElementById('jobSection').scrollIntoView()">查看招聘岗位</button>
+        </div>
+    </div>
+
+    <!-- 企业介绍 -->
+    <div class="company-intro">
+        <div class="intro-container">
+            <div class="intro-text">
+                <h2>关于我们</h2>
+                <p>1991科技成立于2010年，是国内领先的工业物联网解决方案提供商，专注于智能硬件、边缘计算、工业大数据分析等核心技术的研发与应用。</p>
+                <p>公司总部位于北京，在上海、深圳、成都等地设有分支机构，拥有员工500余人，其中研发人员占比超过60%。我们的产品和解决方案已服务于汽车制造、智慧水务、智能制造等多个领域的数千家企业。</p>
+                <p>我们始终坚持“技术创新驱动发展”的理念，每年将营收的15%投入研发，拥有专利和软件著作权超过100项。加入我们，你将与行业顶尖的技术团队并肩作战，共同推动工业物联网行业的发展。</p>
+            </div>
+            <div class="intro-img">
+                <img src="https://picsum.photos/800/600?random=901" alt="公司环境">
+            </div>
+        </div>
+    </div>
+
+    <!-- 岗位分类与列表 -->
+    <div class="job-category" id="jobSection">
+        <div class="section-title">
+            <h2>招聘岗位</h2>
+            <p>我们提供多元化的职业发展机会，涵盖技术研发、产品设计、市场销售、运营管理等多个领域</p>
+        </div>
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="all">全部岗位</div>
+            <div class="category-tab" data-category="tech">技术研发</div>
+            <div class="category-tab" data-category="product">产品设计</div>
+            <div class="category-tab" data-category="sales">市场销售</div>
+            <div class="category-tab" data-category="operation">运营管理</div>
+        </div>
+        <div class="job-list">
+            <!-- 技术研发岗 -->
+            <div class="job-card" data-category="tech">
+                <h3 class="job-title">前端开发工程师</h3>
+                <div class="job-info">
+                    <div class="job-info-item"><i class="bi bi-geo-alt"></i>北京</div>
+                    <div class="job-info-item"><i class="bi bi-cash-stack"></i>15-25K</div>
+                    <div class="job-info-item"><i class="bi bi-briefcase"></i>校招</div>
+                </div>
+                <p class="job-desc">负责公司官网、数据可视化平台、工业物联网管理系统的前端开发；参与前端框架选型与技术架构设计；与后端团队协作，完成接口联调与功能实现。</p>
+                <a href="#" class="job-btn">立即应聘</a>
+            </div>
+
+            <div class="job-card" data-category="tech">
+                <h3 class="job-title">嵌入式开发工程师</h3>
+                <div class="job-info">
+                    <div class="job-info-item"><i class="bi bi-geo-alt"></i>上海</div>
+                    <div class="job-info-item"><i class="bi bi-cash-stack"></i>18-30K</div>
+                    <div class="job-info-item"><i class="bi bi-briefcase"></i>校招</div>
+                </div>
+                <p class="job-desc">负责工业智能网关的嵌入式软件开发；基于ARM架构进行驱动开发与协议适配；参与产品的调试与测试，解决现场技术问题。</p>
+                <a href="#" class="job-btn">立即应聘</a>
+            </div>
+
+            <!-- 产品设计岗 -->
+            <div class="job-card" data-category="product">
+                <h3 class="job-title">产品经理</h3>
+                <div class="job-info">
+                    <div class="job-info-item"><i class="bi bi-geo-alt"></i>北京</div>
+                    <div class="job-info-item"><i class="bi bi-cash-stack"></i>12-20K</div>
+                    <div class="job-info-item"><i class="bi bi-briefcase"></i>校招</div>
+                </div>
+                <p class="job-desc">负责工业物联网平台的产品规划与设计；调研市场需求与竞品分析，输出产品需求文档；协调研发、测试、销售团队，推动产品落地。</p>
+                <a href="#" class="job-btn">立即应聘</a>
+            </div>
+
+            <!-- 市场销售岗 -->
+            <div class="job-card" data-category="sales">
+                <h3 class="job-title">销售工程师</h3>
+                <div class="job-info">
+                    <div class="job-info-item"><i class="bi bi-geo-alt"></i>全国</div>
+                    <div class="job-info-item"><i class="bi bi-cash-stack"></i>8-15K+提成</div>
+                    <div class="job-info-item"><i class="bi bi-briefcase"></i>校招</div>
+                </div>
+                <p class="job-desc">负责工业物联网产品的市场推广与销售；拓展客户资源，完成销售目标；为客户提供产品解决方案，跟进项目落地。</p>
+                <a href="#" class="job-btn">立即应聘</a>
+            </div>
+
+            <!-- 运营管理岗 -->
+            <div class="job-card" data-category="operation">
+                <h3 class="job-title">运营专员</h3>
+                <div class="job-info">
+                    <div class="job-info-item"><i class="bi bi-geo-alt"></i>北京</div>
+                    <div class="job-info-item"><i class="bi bi-cash-stack"></i>8-12K</div>
+                    <div class="job-info-item"><i class="bi bi-briefcase"></i>校招</div>
+                </div>
+                <p class="job-desc">负责公司官网、公众号等内容运营；组织线上线下市场活动；收集客户反馈，优化运营策略。</p>
+                <a href="#" class="job-btn">立即应聘</a>
+            </div>
+
+            <div class="job-card" data-category="tech">
+                <h3 class="job-title">大数据开发工程师</h3>
+                <div class="job-info">
+                    <div class="job-info-item"><i class="bi bi-geo-alt"></i>深圳</div>
+                    <div class="job-info-item"><i class="bi bi-cash-stack"></i>20-35K</div>
+                    <div class="job-info-item"><i class="bi bi-briefcase"></i>校招</div>
+                </div>
+                <p class="job-desc">负责工业大数据平台的开发与维护；基于Hadoop/Spark生态进行数据处理与分析；设计数据仓库架构，优化数据处理性能。</p>
+                <a href="#" class="job-btn">立即应聘</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 应聘指南 -->
+    <div class="apply-guide">
+        <div class="guide-container">
+            <div class="section-title">
+                <h2>应聘指南</h2>
+                <p>清晰的应聘流程，助你快速加入1991科技</p>
+            </div>
+            <div class="guide-steps">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <h4 class="step-title">简历投递</h4>
+                    <p class="step-desc">通过官网、招聘平台或校园宣讲会投递简历，我们将在3个工作日内回复</p>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <h4 class="step-title">笔试/面试</h4>
+                    <p class="step-desc">技术岗位需参加线上笔试，通过后进入面试环节，包含技术面与HR面</p>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <h4 class="step-title">offer发放</h4>
+                    <p class="step-desc">面试通过后，我们将在1周内发放录用通知，并沟通薪资福利等细节</p>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">4</div>
+                    <h4 class="step-title">入职培训</h4>
+                    <p class="step-desc">入职后提供系统的岗前培训，包括公司文化、产品知识、技术技能等</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer style="background-color: #003366; color: white; padding: 30px 0; text-align: center;">
+        <div class="container">
+            <p>1991科技 © 2025 版权所有 | 校招咨询：010-12345678 | hr@company.com</p>
+        </div>
+    </footer>
+
+    <script>
+        // 岗位分类筛选
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const jobCards = document.querySelectorAll('.job-card');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 切换激活状态
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // 筛选岗位
+                jobCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

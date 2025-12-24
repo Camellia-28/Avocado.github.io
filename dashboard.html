@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业数据大屏 - 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #0a1929;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        /* 顶部导航 */
+        .dashboard-header {
+            background-color: #0f2741;
+            padding: 10px 20px;
+            border-bottom: 1px solid #1f3b5e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dashboard-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* 大屏容器 */
+        .dashboard-container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 180px 300px 250px;
+            gap: 20px;
+            height: calc(100vh - 60px);
+            box-sizing: border-box;
+        }
+        /* 数据卡片 */
+        .data-card {
+            background-color: #0f2741;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #1f3b5e;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .card-title {
+            font-size: 0.9rem;
+            color: #8cb4ff;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* 网格布局适配 */
+        .card-1 {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .card-2 {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+        .card-3 {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+        .card-4 {
+            grid-column: 2 / 3;
+            grid-row: 2 / 4;
+        }
+        .card-5 {
+            grid-column: 1 / 2;
+            grid-row: 3 / 4;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        /* 数字统计项 */
+        .stat-item {
+            background-color: #153259;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #40c0ff;
+            margin: 5px 0;
+        }
+        .stat-desc {
+            font-size: 0.8rem;
+            color: #a0b7d9;
+        }
+        /* 滚动列表 */
+        .scroll-list {
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .scroll-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1f3b5e;
+            font-size: 0.8rem;
+        }
+        .status-normal {
+            color: #00e09e;
+        }
+        .status-alert {
+            color: #ff6b6b;
+        }
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #1f3b5e;
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- 大屏头部 -->
+    <div class="dashboard-header">
+        <div class="dashboard-title">工业物联网数据监控大屏</div>
+        <div class="user-info">
+            <span class="small">管理员</span>
+            <img src="https://picsum.photos/30/30?random=500" class="rounded-circle" alt="用户头像">
+        </div>
+    </div>
+
+    <!-- 大屏主体 -->
+    <div class="dashboard-container">
+        <!-- 数据概览卡片 -->
+        <div class="data-card card-1">
+            <div class="stat-item">
+                <div class="stat-desc">在线设备数</div>
+                <div class="stat-num" id="onlineNum">1286</div>
+                <div class="small text-success"><i class="bi bi-arrow-up"></i> 2.3%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-desc">数据采集量</div>
+                <div class="stat-num" id="dataNum">894万</div>
+                <div class="small text-success"><i class="bi bi-arrow-up"></i> 5.7%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-desc">告警数量</div>
+                <div class="stat-num text-danger" id="alertNum">12</div>
+                <div class="small text-danger"><i class="bi bi-arrow-up"></i> 1.1%</div>
+            </div>
+        </div>
+
+        <!-- 设备状态分布 -->
+        <div class="data-card card-2">
+            <div class="card-title">
+                <span>设备状态分布</span>
+                <i class="bi bi-gear fs-6"></i>
+            </div>
+            <div style="height: 120px;">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 生产效率趋势 -->
+        <div class="data-card card-3">
+            <div class="card-title">
+                <span>生产效率趋势（近7天）</span>
+                <span class="small">当前效率：92.5%</span>
+            </div>
+            <div style="height: 220px;">
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 设备告警列表 -->
+        <div class="data-card card-4">
+            <div class="card-title">
+                <span>设备告警列表</span>
+                <span class="badge bg-danger">12条未处理</span>
+            </div>
+            <div class="scroll-list">
+                <div class="scroll-list-item">
+                    <div>
+                        <div>GW-9000-012</div>
+                        <div class="small text-muted">温度异常</div>
+                    </div>
+                    <span class="status-alert">紧急</span>
+                </div>
+                <div class="scroll-list-item">
+                    <div>
+                        <div>GW-9000-045</div>
+                        <div class="small text-muted">网络断开</div>
+                    </div>
+                    <span class="status-alert">紧急</span>
+                </div>
+                <div class="scroll-list-item">
+                    <div>
+                        <div>SEN-8000-023</div>
+                        <div class="small text-muted">电压偏低</div>
+                    </div>
+                    <span class="status-alert">警告</span>
+                </div>
+                <div class="scroll-list-item">
+                    <div>
+                        <div>GW-8000-067</div>
+                        <div class="small text-muted">数据采集失败</div>
+                    </div>
+                    <span class="status-alert">警告</span>
+                </div>
+                <div class="scroll-list-item">
+                    <div>
+                        <div>GW-9000-089</div>
+                        <div class="small text-muted">内存不足</div>
+                    </div>
+                    <span class="status-alert">提示</span>
+                </div>
+                <div class="scroll-list-item">
+                    <div>
+                        <div>SEN-9000-015</div>
+                        <div class="small text-muted">传感器故障</div>
+                    </div>
+                    <span class="status-alert">紧急</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 能耗分析 & 产品良率 -->
+        <div class="data-card card-5">
+            <div>
+                <div class="card-title">
+                    <span>能耗分析</span>
+                </div>
+                <div style="height: 180px;">
+                    <canvas id="energyChart"></canvas>
+                </div>
+            </div>
+            <div>
+                <div class="card-title">
+                    <span>产品良率</span>
+                </div>
+                <div style="height: 180px;">
+                    <canvas id="yieldChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化图表
+        window.onload = function() {
+            // 设备状态分布饼图
+            const statusChart = new Chart(document.getElementById('statusChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['在线', '离线', '异常'],
+                    datasets: [{
+                        data: [1286, 156, 48],
+                        backgroundColor: ['#00e09e', '#a0b7d9', '#ff6b6b'],
+                        borderWidth: 0,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: 'white',
+                                font: { size: 10 }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 生产效率趋势折线图
+            const efficiencyChart = new Chart(document.getElementById('efficiencyChart'), {
+                type: 'line',
+                data: {
+                    labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    datasets: [{
+                        label: '生产效率',
+                        data: [88.2, 90.5, 89.7, 91.3, 92.1, 91.8, 92.5],
+                        borderColor: '#40c0ff',
+                        backgroundColor: 'rgba(64, 192, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#a0b7d9', font: { size: 10 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#a0b7d9', font: { size: 10 }, suffix: '%' },
+                            min: 85,
+                            max: 95
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // 能耗分析柱状图
+            const energyChart = new Chart(document.getElementById('energyChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['车间1', '车间2', '车间3', '车间4'],
+                    datasets: [{
+                        label: '能耗(度)',
+                        data: [12500, 9800, 15600, 8900],
+                        backgroundColor: ['#40c0ff', '#00e09e', '#ffd166', '#ff6b6b'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#a0b7d9', font: { size: 10 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#a0b7d9', font: { size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // 产品良率雷达图
+            const yieldChart = new Chart(document.getElementById('yieldChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['产品A', '产品B', '产品C', '产品D', '产品E'],
+                    datasets: [{
+                        label: '良率(%)',
+                        data: [98.2, 97.5, 96.8, 99.1, 97.9],
+                        borderColor: '#00e09e',
+                        backgroundColor: 'rgba(0, 224, 158, 0.2)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#a0b7d9', font: { size: 10 } },
+                            ticks: { color: '#a0b7d9', font: { size: 8 }, suffix: '%' },
+                            min: 90,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // 模拟数据实时更新
+            setInterval(() => {
+                const onlineNum = document.getElementById('onlineNum');
+                const newOnline = parseInt(onlineNum.innerText) + Math.floor(Math.random() * 5) - 2;
+                onlineNum.innerText = newOnline;
+
+                const alertNum = document.getElementById('alertNum');
+                const newAlert = parseInt(alertNum.innerText) + Math.floor(Math.random() * 3) - 1;
+                alertNum.innerText = newAlert < 0 ? 0 : newAlert;
+            }, 3000);
+        };
+    </script>
+</body>
+</html>

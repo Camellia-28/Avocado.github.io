@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助中心 - 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+        }
+        .navbar {
+            background-color: #003366;
+        }
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        /* 帮助中心头部 */
+        .help-header {
+            background-color: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .help-search {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* 帮助中心主体 */
+        .help-container {
+            padding: 30px 0;
+        }
+        /* 左侧分类 */
+        .help-categories {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            height: 100%;
+            position: sticky;
+            top: 20px;
+        }
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-item {
+            margin-bottom: 8px;
+        }
+        .category-link {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .category-link:hover, .category-link.active {
+            background-color: #e7f5ff;
+            color: #003366;
+        }
+        /* 右侧内容 */
+        .help-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+        .content-header {
+            margin-bottom: 20px;
+        }
+        .content-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .content-header p {
+            color: #666;
+            margin-bottom: 0;
+        }
+        /* 问答面板 */
+        .faq-accordion {
+            border: 1px solid #eee;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-header {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+        }
+        .faq-header h5 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+        .faq-body {
+            padding: 20px;
+            display: none;
+            color: #666;
+        }
+        .faq-body.active {
+            display: block;
+        }
+        /* 联系客服 */
+        .contact-service {
+            background-color: #e7f5ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .contact-service h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .service-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+        .service-btn:hover {
+            background-color: #004080;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solution1.html">解决方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">新闻动态</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recruit.html">加入我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 帮助中心头部 -->
+    <div class="help-header">
+        <div class="container">
+            <div class="help-search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入您的问题关键词" aria-label="搜索帮助">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-search"></i> 搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 帮助中心主体 -->
+    <div class="help-container">
+        <div class="container">
+            <div class="row">
+                <!-- 左侧分类导航 -->
+                <div class="col-lg-3">
+                    <div class="help-categories">
+                        <div class="category-title">帮助分类</div>
+                        <ul class="category-list">
+                            <li class="category-item"><a href="#" class="category-link active">产品使用</a></li>
+                            <li class="category-item"><a href="#" class="category-link">订单支付</a></li>
+                            <li class="category-item"><a href="#" class="category-link">售后支持</a></li>
+                            <li class="category-item"><a href="#" class="category-link">账户管理</a></li>
+                            <li class="category-item"><a href="#" class="category-link">发票相关</a></li>
+                            <li class="category-item"><a href="#" class="category-link">合作加盟</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 右侧内容区 -->
+                <div class="col-lg-9">
+                    <div class="help-content">
+                        <div class="content-header">
+                            <h3>产品使用常见问题</h3>
+                            <p>关于1991科技产品安装、配置、使用的常见问题解答</p>
+                        </div>
+
+                        <!-- 问答面板 -->
+                        <div class="faq-accordion">
+                            <div class="faq-item">
+                                <div class="faq-header" onclick="toggleFaq(this)">
+                                    <h5>GW-9000智能网关如何进行初次配置？</h5>
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                                <div class="faq-body">
+                                    <p>GW-9000智能网关初次配置步骤如下：</p>
+                                    <ol>
+                                        <li>将网关通过网线连接到路由器或交换机，接通电源；</li>
+                                        <li>在电脑上设置静态IP为192.168.1.100（网关默认IP为192.168.1.1）；</li>
+                                        <li>打开浏览器，输入http://192.168.1.1进入配置页面；</li>
+                                        <li>使用默认账号admin，密码admin登录；</li>
+                                        <li>进入网络设置，配置网关的IP地址、子网掩码、网关等信息；</li>
+                                        <li>进入协议配置，添加需要采集的设备协议和参数；</li>
+                                        <li>保存配置并重启网关，配置生效。</li>
+                                    </ol>
+                                    <p>也可参考产品手册中的详细配置指南，或联系技术支持获取远程协助。</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-header" onclick="toggleFaq(this)">
+                                    <h5>网关无法连接到物联网平台怎么办？</h5>
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                                <div class="faq-body">
+                                    <p>网关无法连接到物联网平台可按以下步骤排查：</p>
+                                    <ul>
+                                        <li>检查网关的网络连接是否正常，能否ping通平台服务器地址；</li>
+                                        <li>检查网关的平台配置参数（如平台地址、端口、设备ID、密钥等）是否正确；</li>
+                                        <li>检查防火墙是否开放了网关与平台的通信端口；</li>
+                                        <li>查看网关的系统日志，确认具体的错误信息；</li>
+                                        <li>尝试重启网关或平台服务。</li>
+                                    </ul>
+                                    <p>若问题仍未解决，请联系技术支持人员协助排查。</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-header" onclick="toggleFaq(this)">
+                                    <h5>传感器数据采集失败的原因有哪些？</h5>
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                                <div class="faq-body">
+                                    <p>传感器数据采集失败的常见原因包括：</p>
+                                    <ul>
+                                        <li>传感器与网关的物理连接松动或损坏；</li>
+                                        <li>传感器的供电电压异常；</li>
+                                        <li>网关的协议配置与传感器的协议类型不匹配；</li>
+                                        <li>传感器地址设置错误；</li>
+                                        <li>传感器本身故障。</li>
+                                    </ul>
+                                    <p>建议逐一排查以上因素，或使用测试工具检测传感器的工作状态。</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-header" onclick="toggleFaq(this)">
+                                    <h5>如何升级网关的固件版本？</h5>
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                                <div class="faq-body">
+                                    <p>网关固件升级可通过以下两种方式：</p>
+                                    <h6>1. 本地升级</h6>
+                                    <ol>
+                                        <li>从官网下载最新的固件文件；</li>
+                                        <li>登录网关配置页面，进入系统升级模块；</li>
+                                        <li>选择本地固件文件，点击升级按钮；</li>
+                                        <li>等待升级完成，网关会自动重启。</li>
+                                    </ol>
+                                    <h6>2. 远程升级</h6>
+                                    <ol>
+                                        <li>确保网关已连接到物联网平台；</li>
+                                        <li>在平台后台选择需要升级的网关设备；</li>
+                                        <li>上传固件文件并发起升级指令；</li>
+                                        <li>等待升级完成，可在平台查看升级状态。</li>
+                                    </ol>
+                                    <p>升级过程中请勿断电，否则可能导致网关损坏。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 联系客服 -->
+                        <div class="contact-service">
+                            <h4>仍未解决您的问题？</h4>
+                            <a href="contact.html" class="service-btn">在线咨询</a>
+                            <a href="tel:4001234567" class="service-btn">电话咨询</a>
+                            <a href="mailto:support@company.com" class="service-btn">邮件咨询</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">1991科技</h5>
+                    <p>专注于智能硬件与软件解决方案的研发与服务，致力于为客户创造价值。</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-weixin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-weibo"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">首页</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">关于我们</a></li>
+                        <li><a href="product1.html" class="text-white text-decoration-none">产品中心</a></li>
+                        <li><a href="recruit.html" class="text-white text-decoration-none">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">联系我们</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>西安市长安区科技园100号</li>
+                        <li><i class="bi bi-phone me-2"></i>400-123-4567</li>
+                        <li><i class="bi bi-envelope me-2"></i>contact@company.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top mt-4 pt-4 text-center text-white-50">
+                <p>© 2025 1991科技有限公司 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 折叠面板切换
+        function toggleFaq(el) {
+            const body = el.nextElementSibling;
+            const icon = el.querySelector('i');
+            
+            // 关闭其他面板
+            document.querySelectorAll('.faq-body.active').forEach(item => {
+                if (item !== body) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('i').classList.remove('bi-chevron-up');
+                    item.previousElementSibling.querySelector('i').classList.add('bi-chevron-down');
+                }
+            });
+
+            // 切换当前面板
+            body.classList.toggle('active');
+            if (body.classList.contains('active')) {
+                icon.classList.remove('bi-chevron-down');
+                icon.classList.add('bi-chevron-up');
+            } else {
+                icon.classList.remove('bi-chevron-up');
+                icon.classList.add('bi-chevron-down');
+            }
+        }
+
+        // 默认展开第一个面板
+        window.onload = function() {
+            const firstFaq = document.querySelector('.faq-header');
+            toggleFaq(firstFaq);
+        };
+    </script>
+</body>
+</html>

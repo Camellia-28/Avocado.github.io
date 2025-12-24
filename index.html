@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1991科技 - 工业物联网解决方案领先提供商</title>
+    <!-- 引入Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- 自定义样式 -->
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+        a {
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        /* 导航栏 */
+        .navbar {
+            background-color: #003366 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .nav-link {
+            color: white !important;
+            margin: 0 8px;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .dropdown-menu {
+            background-color: #003366;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .dropdown-item {
+            color: white;
+            padding: 10px 20px;
+        }
+        .dropdown-item:hover {
+            background-color: #004080;
+            color: white;
+        }
+        /* 轮播图 */
+        .carousel-item {
+            height: 80vh;
+            min-height: 500px;
+        }
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            filter: brightness(0.7);
+        }
+        .carousel-caption {
+            bottom: 30%;
+            z-index: 2;
+            text-align: left;
+            max-width: 600px;
+            left: 10%;
+        }
+        .carousel-caption h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .carousel-caption p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .carousel-btn {
+            padding: 12px 30px;
+            background-color: white;
+            color: #003366;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .carousel-btn:hover {
+            background-color: #e7f5ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        /* 核心优势 */
+        .advantage-section {
+            padding: 80px 0;
+            background-color: #f9fafb;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 15px;
+        }
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        .advantage-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #e7f5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .advantage-icon i {
+            font-size: 2rem;
+            color: #003366;
+        }
+        .advantage-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 15px;
+        }
+        .advantage-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+        /* 产品中心 */
+        .product-section {
+            padding: 80px 0;
+        }
+        .product-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        .product-content {
+            padding: 20px;
+        }
+        .product-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .product-content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        .product-link {
+            display: inline-block;
+            color: #003366;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .product-link:hover {
+            color: #004080;
+            padding-left: 5px;
+        }
+        .product-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        .product-link:hover i {
+            transform: translateX(5px);
+        }
+        /* 解决方案 */
+        .solution-section {
+            padding: 80px 0;
+            background-color: #f9fafb;
+        }
+        .solution-item {
+            position: relative;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .solution-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .solution-item:hover img {
+            transform: scale(1.05);
+        }
+        .solution-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 51, 102, 0), rgba(0, 51, 102, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: white;
+        }
+        .solution-overlay h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .solution-overlay p {
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        .solution-link {
+            color: white;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        .solution-link:hover {
+            color: #e7f5ff;
+            padding-left: 5px;
+        }
+        /* 新闻动态 */
+        .news-section {
+            padding: 80px 0;
+        }
+        .news-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .news-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .news-content {
+            padding: 20px;
+        }
+        .news-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        .news-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .news-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .news-link {
+            display: inline-block;
+            color: #003366;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .news-link:hover {
+            color: #004080;
+        }
+        /* 招聘板块 */
+        .recruit-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.9)), url('https://picsum.photos/1920/600?random=950');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        .recruit-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .recruit-content p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        .recruit-btn {
+            padding: 12px 30px;
+            background-color: white;
+            color: #003366;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        .recruit-btn:hover {
+            background-color: #e7f5ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        /* 页脚 */
+        footer {
+            background-color: #003366;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-col h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #004080;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .contact-info i {
+            width: 30px;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #004080;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background-color: white;
+            color: #003366;
+            transform: translateY(-3px);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #004080;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .carousel-caption {
+                bottom: 20%;
+                left: 5%;
+                right: 5%;
+                max-width: 100%;
+                text-align: center;
+            }
+            .carousel-caption h1 {
+                font-size: 2rem;
+            }
+            .carousel-caption p {
+                font-size: 1rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .recruit-content h2 {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .advantage-section, .product-section, .solution-section, .news-section, .recruit-section {
+                padding: 60px 0;
+            }
+            .footer-col {
+                margin-bottom: 30px;
+            }
+        }
+        @media (max-width: 576px) {
+            .carousel-caption h1 {
+                font-size: 1.5rem;
+            }
+            .carousel-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .recruit-btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- 基础导航项 -->
+                    <li class="nav-item"><a class="nav-link active" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solution1.html">解决方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">新闻动态</a></li>
+                    
+                    <!-- 招聘专题页：独立导航项 -->
+                    <li class="nav-item"><a class="nav-link" href="recruit-detail.html">加入我们</a></li>
+                    
+                    <li class="nav-item"><a class="nav-link" href="contact.html">联系我们</a></li>
+                    
+                    <!-- 下载中心+数据可视化：资源中心下拉菜单 -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            资源中心
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="download-center.html"><i class="bi bi-download me-2"></i>下载中心</a></li>
+                            <li><a class="dropdown-item" href="dashboard-detail.html"><i class="bi bi-speedometer2 me-2"></i>数据监控大屏</a></li>
+                            <li><a class="dropdown-item" href="help-center.html"><i class="bi bi-question-circle me-2"></i>帮助中心</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 用户服务下拉菜单 -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            用户服务
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="user-center.html"><i class="bi bi-person me-2"></i>用户中心</a></li>
+                            <li><a class="dropdown-item" href="message.html"><i class="bi bi-chat-dots me-2"></i>在线留言</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- 登录按钮 -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="login.html">登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 轮播图 -->
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/1920/1080?random=900" class="d-block w-100" alt="工业物联网解决方案">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>工业物联网解决方案</h1>
+                    <p>以技术赋能产业升级，打造智能、高效、安全的工业互联生态</p>
+                    <button class="carousel-btn" onclick="window.location.href='solution1.html'">了解解决方案</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1920/1080?random=901" class="d-block w-100" alt="智能网关产品">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>新一代工业智能网关</h1>
+                    <p>高速采集、边缘计算、多协议兼容，满足工业场景全需求</p>
+                    <button class="carousel-btn" onclick="window.location.href='product1.html'">查看产品详情</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1920/1080?random=902" class="d-block w-100" alt="数据可视化">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>工业数据可视化大屏</h1>
+                    <p>实时监控、智能分析、精准告警，让数据驱动决策</p>
+                    <button class="carousel-btn" onclick="window.location.href='dashboard-detail.html'">体验数据大屏</button>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- 核心优势 -->
+    <section class="advantage-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心优势</h2>
+                <p>十年工业物联网领域深耕，打造技术、产品、服务全方位竞争优势</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="bi bi-gear-fill"></i>
+                        </div>
+                        <h3>技术领先</h3>
+                        <p>拥有100+项专利及软件著作权，核心团队均来自行业头部企业，技术实力行业领先</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="bi bi-box-fill"></i>
+                        </div>
+                        <h3>产品可靠</h3>
+                        <p>全系列产品通过IP65、EMC等严苛认证，适应-40℃~85℃极端工业环境，稳定运行无故障</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h3>服务完善</h3>
+                        <p>全国7×24小时技术支持，50+本地化服务网点，快速响应客户需求，提供全生命周期服务</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="bi bi-globe-fill"></i>
+                        </div>
+                        <h3>生态开放</h3>
+                        <p>兼容主流工业协议，提供开放API接口，可与ERP、MES等系统无缝对接，打通数据孤岛</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品中心 -->
+    <section class="product-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心产品</h2>
+                <p>聚焦工业物联网核心场景，打造全系列智能硬件与软件平台</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://picsum.photos/600/400?random=910" alt="智能网关">
+                        </div>
+                        <div class="product-content">
+                            <h3>GW-9000工业智能网关</h3>
+                            <p>5G+Wi-Fi 6双网融合，支持200+设备同时接入，边缘计算能力提升120%</p>
+                            <a href="product1.html" class="product-link">查看详情 <i class="bi bi-arrow-right"></i></a>
+                            <a href="dashboard-detail.html?productId=gw9000" class="product-link mt-2 d-block">查看数据监控 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://picsum.photos/600/400?random=911" alt="传感器">
+                        </div>
+                        <div class="product-content">
+                            <h3>SM-800系列工业传感器</h3>
+                            <p>高精度、低功耗、抗干扰，支持温度、压力、振动等多维度数据采集</p>
+                            <a href="product1.html" class="product-link">查看详情 <i class="bi bi-arrow-right"></i></a>
+                            <a href="download-center.html?category=product&product=sm800" class="product-link mt-2 d-block">下载手册 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://picsum.photos/600/400?random=912" alt="物联网平台">
+                        </div>
+                        <div class="product-content">
+                            <h3>IoT Platform工业物联网平台</h3>
+                            <p>一站式设备管理、数据可视化、智能分析平台，支持百万级设备接入</p>
+                            <a href="product1.html" class="product-link">查看详情 <i class="bi bi-arrow-right"></i></a>
+                            <a href="solution1.html" class="product-link mt-2 d-block">查看应用案例 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="product1.html" class="btn btn-primary px-5 py-2">查看全部产品</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案 -->
+    <section class="solution-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>行业解决方案</h2>
+                <p>深度适配不同行业场景，提供定制化的工业物联网解决方案</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-item">
+                        <img src="https://picsum.photos/600/400?random=920" alt="智能制造">
+                        <div class="solution-overlay">
+                            <h3>智能制造</h3>
+                            <p>生产线智能化改造，实现设备监控、质量检测、能耗管理全流程数字化</p>
+                            <a href="solution1.html" class="solution-link">了解详情 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-item">
+                        <img src="https://picsum.photos/600/400?random=921" alt="智慧水务">
+                        <div class="solution-overlay">
+                            <h3>智慧水务</h3>
+                            <p>供排水管网远程监控，水质实时检测，漏损分析与预警，提升水务管理效率</p>
+                            <a href="solution1.html" class="solution-link">了解详情 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-item">
+                        <img src="https://picsum.photos/600/400?random=922" alt="智慧园区">
+                        <div class="solution-overlay">
+                            <h3>智慧园区</h3>
+                            <p>园区安防、能耗、环境、资产管理一体化，打造绿色、智能、高效的园区生态</p>
+                            <a href="solution1.html" class="solution-link">了解详情 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="solution1.html" class="btn btn-primary px-5 py-2">查看全部解决方案</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新闻动态 -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>新闻动态</h2>
+                <p>关注行业前沿动态，了解1991科技最新产品、技术与合作资讯</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://picsum.photos/600/400?random=930" alt="新品发布">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span><i class="bi bi-calendar"></i> 2025-05-28</span>
+                                <span><i class="bi bi-tag"></i> 产品发布</span>
+                            </div>
+                            <h3>1991科技发布新一代工业智能网关GW-9000 赋能智能制造升级</h3>
+                            <p class="news-desc">5月28日，1991科技正式发布新一代工业智能网关GW-9000，该产品基于ARM Cortex-A53四核处理器打造，集成了5G、Wi-Fi 6、以太网等多种通信方式...</p>
+                            <a href="news-detail.html" class="news-link">阅读全文 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://picsum.photos/600/400?random=931" alt="战略合作">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span><i class="bi bi-calendar"></i> 2025-05-15</span>
+                                <span><i class="bi bi-tag"></i> 战略合作</span>
+                            </div>
+                            <h3>1991科技与某汽车集团达成战略合作 共建智能工厂</h3>
+                            <p class="news-desc">近日，1991科技与国内某知名汽车集团签署战略合作协议，双方将围绕智能工厂建设展开深度合作，共同推动汽车制造行业的数字化转型...</p>
+                            <a href="news-detail.html" class="news-link">阅读全文 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://picsum.photos/600/400?random=932" alt="行业荣誉">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span><i class="bi bi-calendar"></i> 2025-05-08</span>
+                                <span><i class="bi bi-tag"></i> 行业荣誉</span>
+                            </div>
+                            <h3>1991科技入选2025中国工业物联网企业TOP50</h3>
+                            <p class="news-desc">近日，由权威机构发布的《2025中国工业物联网企业竞争力报告》正式出炉，1991科技凭借在技术创新、产品实力、市场表现等方面的优异表现...</p>
+                            <a href="news-detail.html" class="news-link">阅读全文 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="news.html" class="btn btn-primary px-5 py-2">查看更多新闻</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 招聘板块 -->
+    <section class="recruit-section">
+        <div class="container">
+            <div class="recruit-content">
+                <h2>加入我们</h2>
+                <p>我们期待有梦想、有激情、有能力的你加入，一起用技术改变工业未来</p>
+                <button class="recruit-btn" onclick="window.location.href='recruit-detail.html'">校园招聘</button>
+                <button class="recruit-btn" onclick="window.location.href='recruit-detail.html'">社会招聘</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-col">
+                    <h3>关于我们</h3>
+                    <ul>
+                        <li><a href="about.html">企业简介</a></li>
+                        <li><a href="about.html#team">核心团队</a></li>
+                        <li><a href="about.html#honor">荣誉资质</a></li>
+                        <li><a href="about.html#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-col">
+                    <h3>产品中心</h3>
+                    <ul>
+                        <li><a href="product1.html">智能网关</a></li>
+                        <li><a href="product1.html">工业传感器</a></li>
+                        <li><a href="product1.html">物联网平台</a></li>
+                        <li><a href="product1.html">数据可视化大屏</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-col">
+                    <h3>资源中心</h3>
+                    <ul>
+                        <li><a href="download-center.html">产品手册</a></li>
+                        <li><a href="download-center.html#tech">技术文档</a></li>
+                        <li><a href="download-center.html#case">案例文档</a></li>
+                        <li><a href="help-center.html">帮助中心</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-col">
+                    <h3>联系我们</h3>
+                    <div class="contact-info">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>北京市海淀区中关村科技园XX大厦XX层</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="bi bi-phone"></i>
+                        <span>400-123-4567</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="bi bi-envelope"></i>
+                        <span>info@company.com</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="bi bi-weixin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-weibo"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>1991科技 © 2025 版权所有 | 陕ICP备XXXXXXXX号 | 陕公网安备XXXXXXXXXXXX号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 自定义JS -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = '#003366 !important';
+                navbar.style.padding = '10px 0';
+                navbar.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.padding = '15px 0';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // 轮播图自动播放
+        const carousel = new bootstrap.Carousel(document.getElementById('heroCarousel'), {
+            interval: 5000,
+            wrap: true
+        });
+    </script>
+</body>
+</html>

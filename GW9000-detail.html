@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GW-9000 AIoT智能网关 - 产品详情 | 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; }
+        .navbar { background-color: #003366; }
+        .footer { background-color: #003366; color: white; padding: 30px 0; margin-top: 50px; }
+        .page-header { background: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eee; }
+        /* 产品图片栏固定 */
+        .product-gallery { position: sticky; top: 20px; }
+        .product-tab-content { min-height: 400px; }
+        .product-spec-table { width: 100%; border-collapse: collapse; }
+        .product-spec-table td { padding: 10px; border: 1px solid #eee; }
+        .product-spec-table tr:nth-child(even) { background-color: #f8f9fa; }
+        .video-container { width: 100%; height: 400px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #666; }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solution1.html">解决方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">新闻动态</a></li>
+					<li class="nav-item"><a class="nav-link" href="recruit.html">加入我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">首页</a></li>
+                    <li class="breadcrumb-item"><a href="product1.html">产品中心</a></li>
+                    <li class="breadcrumb-item"><a href="product1.html">智能网关</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">GW-9000</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- 产品详情主体 -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- 产品图片栏 -->
+                <div class="col-lg-4">
+                    <div class="product-gallery">
+                        <div class="mb-3">
+                            <img src="https://picsum.photos/600/600?random=400" class="img-fluid rounded shadow" alt="GW-9000 主图">
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-3">
+                                <img src="https://picsum.photos/100/100?random=401" class="img-fluid rounded border" alt="产品细节1">
+                            </div>
+                            <div class="col-3">
+                                <img src="https://picsum.photos/100/100?random=402" class="img-fluid rounded border" alt="产品细节2">
+                            </div>
+                            <div class="col-3">
+                                <img src="https://picsum.photos/100/100?random=403" class="img-fluid rounded border" alt="产品细节3">
+                            </div>
+                            <div class="col-3">
+                                <a href="#" class="d-flex align-items-center justify-content-center bg-light rounded" style="height: 100px;">
+                                    <i class="bi bi-play-circle text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a href="contact.html" class="btn btn-primary w-100 mb-2">咨询报价</a>
+                            <a href="#" class="btn btn-outline-primary w-100">下载手册</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 产品信息栏 -->
+                <div class="col-lg-8">
+                    <h1 class="mb-2">GW-9000 工业级AIoT智能网关</h1>
+                    <div class="mb-4">
+                        <span class="badge bg-primary me-2">新一代边缘计算网关</span>
+                        <span class="badge bg-secondary me-2">工业级设计</span>
+                        <span class="badge bg-success">现货供应</span>
+                    </div>
+                    <p class="text-muted fs-5 mb-4">¥ 5,999.00 <span class="text-secondary fs-6">起</span></p>
+
+                    <!-- 产品标签页 -->
+                    <ul class="nav nav-tabs mb-4" id="productTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="intro-tab" data-bs-toggle="tab" data-bs-target="#intro" type="button" role="tab">产品介绍</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="spec-tab" data-bs-toggle="tab" data-bs-target="#spec" type="button" role="tab">技术参数</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="video-tab" data-bs-toggle="tab" data-bs-target="#video" type="button" role="tab">产品视频</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq" type="button" role="tab">常见问题</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content product-tab-content" id="productTabContent">
+                        <!-- 产品介绍 -->
+                        <div class="tab-pane fade show active" id="intro" role="tabpanel">
+                            <div class="text-muted">
+                                <h4 class="h5 text-dark mb-3">产品概述</h4>
+                                <p>GW-9000是1991科技自主研发的新一代工业级AIoT智能网关，搭载四核ARM Cortex-A53处理器，集成边缘计算、AI推理、多协议转换等功能，可实现工业设备的互联互通和数据智能分析，广泛应用于智能制造、智慧能源、智慧城市等领域。</p>
+                                
+                                <h4 class="h5 text-dark mb-3">核心优势</h4>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex align-items-start">
+                                            <i class="bi bi-cpu text-primary fs-4 me-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="h6 mb-1">高性能计算</h5>
+                                                <p class="small text-muted">四核ARM Cortex-A53处理器，1.5GHz主频，处理能力提升50%。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex align-items-start">
+                                            <i class="bi bi-diagram-3 text-primary fs-4 me-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="h6 mb-1">多协议支持</h5>
+                                                <p class="small text-muted">支持1000+种工业协议，兼容主流工业设备。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex align-items-start">
+                                            <i class="bi bi-brain text-primary fs-4 me-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="h6 mb-1">AI边缘推理</h5>
+                                                <p class="small text-muted">内置AI推理框架，支持本地智能分析和故障预警。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="d-flex align-items-start">
+                                            <i class="bi bi-shield-hardhat text-primary fs-4 me-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="h6 mb-1">工业级防护</h5>
+                                                <p class="small text-muted">-40℃~+85℃工作温度，IP65防护等级。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4 class="h5 text-dark mb-3">应用场景</h4>
+                                <div class="row">
+                                    <div class="col-md-4 mb-2">
+                                        <div class="bg-light p-3 rounded text-center">
+                                            <i class="bi bi-car text-primary mb-2"></i>
+                                            <p class="small mb-0">汽车制造</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-2">
+                                        <div class="bg-light p-3 rounded text-center">
+                                            <i class="bi bi-lightning text-primary mb-2"></i>
+                                            <p class="small mb-0">智慧能源</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-2">
+                                        <div class="bg-light p-3 rounded text-center">
+                                            <i class="bi bi-building text-primary mb-2"></i>
+                                            <p class="small mb-0">智慧城市</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 技术参数 -->
+                        <div class="tab-pane fade" id="spec" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="product-spec-table">
+                                    <tbody>
+                                        <tr>
+                                            <td width="30%"><strong>处理器</strong></td>
+                                            <td>四核ARM Cortex-A53，1.5GHz</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>内存</strong></td>
+                                            <td>2GB DDR4（可扩展至4GB）</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>存储</strong></td>
+                                            <td>8GB eMMC（可扩展至32GB）</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>网口</strong></td>
+                                            <td>4×千兆以太网口（RJ45）</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>串口</strong></td>
+                                            <td>4×RS485，2×RS232，1×RS422</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>无线通信</strong></td>
+                                            <td>5G/4G/3G，WiFi 5，蓝牙5.0，LoRa</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>工作温度</strong></td>
+                                            <td>-40℃ ~ +85℃</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>工作电压</strong></td>
+                                            <td>9~36V DC</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>防护等级</strong></td>
+                                            <td>IP30（导轨式）/IP65（壁挂式）</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 产品视频 -->
+                        <div class="tab-pane fade" id="video" role="tabpanel">
+                            <div class="video-container">
+                                <div class="text-center">
+                                    <i class="bi bi-play-circle display-1 mb-3"></i>
+                                    <p>GW-9000 产品介绍视频（时长：5分30秒）</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="h6 mb-3">相关视频</h5>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <div class="bg-light p-3 rounded d-flex align-items-center">
+                                            <i class="bi bi-play-btn text-primary me-3"></i>
+                                            <p class="small mb-0">GW-9000 安装教程</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="bg-light p-3 rounded d-flex align-items-center">
+                                            <i class="bi bi-play-btn text-primary me-3"></i>
+                                            <p class="small mb-0">GW-9000 协议配置指南</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 常见问题 -->
+                        <div class="tab-pane fade" id="faq" role="tabpanel">
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item mb-2">
+                                    <h2 class="accordion-header" id="faq1">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                            GW-9000支持哪些工业协议？
+                                        </button>
+                                    </h2>
+                                    <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body text-muted small">
+                                            支持Modbus、OPC UA/DA、MQTT、TCP/IP、UDP、Profinet、EtherNet/IP、CANopen等1000+种工业协议，可兼容市场上主流的PLC、变频器、传感器等工业设备。
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item mb-2">
+                                    <h2 class="accordion-header" id="faq2">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                            GW-9000的边缘计算能力如何？
+                                        </button>
+                                    </h2>
+                                    <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body text-muted small">
+                                            搭载四核ARM Cortex-A53处理器，主频1.5GHz，支持Python/C/C++/Java等编程语言开发，可实现数据的本地分析和处理，降低云端计算压力，同时支持TensorFlow Lite和ONNX Runtime等AI框架，实现设备故障预警、生产质量检测等AI应用。
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item mb-2">
+                                    <h2 class="accordion-header" id="faq3">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                            GW-9000的质保期是多久？
+                                        </button>
+                                    </h2>
+                                    <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body text-muted small">
+                                            产品质保期为2年，提供7×24小时技术支持，终身维护。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相关产品推荐 -->
+            <div class="mt-5">
+                <h3 class="h5 mb-4">相关产品推荐</h3>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="card h-100">
+                            <img src="https://picsum.photos/400/250?random=410" class="card-img-top" alt="GW-8000">
+                            <div class="card-body p-3">
+                                <h5 class="h6 card-title">GW-8000 工业智能网关</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary w-100 mt-2">查看详情</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100">
+                            <img src="https://picsum.photos/400/250?random=411" class="card-img-top" alt="SEN-9000">
+                            <div class="card-body p-3">
+                                <h5 class="h6 card-title">SEN-9000 多参数传感器</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary w-100 mt-2">查看详情</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100">
+                            <img src="https://picsum.photos/400/250?random=412" class="card-img-top" alt="DAT-7000">
+                            <div class="card-body p-3">
+                                <h5 class="h6 card-title">DAT-7000 数据采集器</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary w-100 mt-2">查看详情</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100">
+                            <img src="https://picsum.photos/400/250?random=413" class="card-img-top" alt="IoT Platform">
+                            <div class="card-body p-3">
+                                <h5 class="h6 card-title">物联网平台V3.0</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary w-100 mt-2">查看详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">1991科技</h5>
+                    <p>专注于智能硬件与软件解决方案的研发与服务，致力于为客户创造价值。</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-weixin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-weibo"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">首页</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">关于我们</a></li>
+                        <li><a href="product1.html" class="text-white text-decoration-none">产品中心</a></li>
+                        <li><a href="news.html" class="text-white text-decoration-none">新闻动态</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">联系我们</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>西安市长安区科技园100号</li>
+                        <li><i class="bi bi-phone me-2"></i>400-123-4567</li>
+                        <li><i class="bi bi-envelope me-2"></i>contact@company.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top mt-4 pt-4 text-center text-white-50">
+                <p>© 2025 1991科技有限公司 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

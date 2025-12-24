@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线留言 - 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+        }
+        .navbar {
+            background-color: #003366;
+        }
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        /* 留言容器 */
+        .message-container {
+            padding: 40px 0;
+        }
+        .message-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        /* 左侧留言列表 */
+        .message-list {
+            width: 300px;
+            border-right: 1px solid #eee;
+            padding: 20px;
+            height: 600px;
+            overflow-y: auto;
+            float: left;
+        }
+        .message-list-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .message-item {
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .message-item:hover, .message-item.active {
+            background-color: #e7f5ff;
+        }
+        .message-item-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .message-item-desc {
+            font-size: 0.8rem;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .message-item-time {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 5px;
+        }
+        /* 右侧对话区 */
+        .message-chat {
+            margin-left: 300px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 对话头部 */
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #003366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        .chat-title {
+            font-weight: 600;
+        }
+        /* 对话内容区 */
+        .chat-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9fafb;
+        }
+        /* 消息气泡 */
+        .msg {
+            margin-bottom: 20px;
+            max-width: 70%;
+        }
+        .msg-user {
+            margin-left: auto;
+        }
+        .msg-admin {
+            margin-right: auto;
+        }
+        .msg-bubble {
+            padding: 12px 18px;
+            border-radius: 18px;
+            position: relative;
+        }
+        .msg-user .msg-bubble {
+            background-color: #003366;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .msg-admin .msg-bubble {
+            background-color: white;
+            border: 1px solid #eee;
+            border-bottom-left-radius: 4px;
+        }
+        .msg-time {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 5px;
+            text-align: right;
+        }
+        .msg-admin .msg-time {
+            text-align: left;
+        }
+        /* 对话输入区 */
+        .chat-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        .input-group {
+            width: 100%;
+        }
+        .form-control {
+            border-radius: 30px;
+            padding: 12px 20px;
+            border: 1px solid #eee;
+        }
+        .btn-send {
+            border-radius: 30px;
+            background-color: #003366;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+        }
+        .btn-send:hover {
+            background-color: #004080;
+            color: white;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .message-list {
+                width: 100%;
+                height: auto;
+                float: none;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            .message-chat {
+                margin-left: 0;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solution1.html">解决方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cases.html">成功案例</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">新闻动态</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recruit.html">加入我们</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="message.html">在线留言</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            用户服务
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="user-center.html"><i class="bi bi-person me-2"></i>用户中心</a></li>
+                            <li><a class="dropdown-item" href="help-center.html"><i class="bi bi-question-circle me-2"></i>帮助中心</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html"><i class="bi bi-bar-chart me-2"></i>数据大屏</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="login.html">登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 留言主体 -->
+    <div class="message-container">
+        <div class="container">
+            <div class="message-card">
+                <!-- 左侧留言列表 -->
+                <div class="message-list">
+                    <div class="message-list-title">我的留言</div>
+                    <div class="message-item active">
+                        <div class="message-item-title">产品咨询</div>
+                        <div class="message-item-desc">请问GW-9000网关支持哪些协议？</div>
+                        <div class="message-item-time">2025-05-20 14:30</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-item-title">售后问题</div>
+                        <div class="message-item-desc">网关无法连接到平台，请求协助</div>
+                        <div class="message-item-time">2025-05-15 09:15</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-item-title">合作咨询</div>
+                        <div class="message-item-desc">希望洽谈区域代理合作事宜</div>
+                        <div class="message-item-time">2025-05-10 16:40</div>
+                    </div>
+                </div>
+
+                <!-- 右侧对话区 -->
+                <div class="message-chat">
+                    <!-- 对话头部 -->
+                    <div class="chat-header">
+                        <div class="chat-avatar"><i class="bi bi-headset"></i></div>
+                        <div>
+                            <div class="chat-title">在线客服</div>
+                            <div class="small text-muted">工作日 9:00-18:00 在线</div>
+                        </div>
+                    </div>
+
+                    <!-- 对话内容区 -->
+                    <div class="chat-content" id="chatContent">
+                        <!-- 系统消息 -->
+                        <div class="msg">
+                            <div class="text-center small text-muted">2025-05-20 14:30</div>
+                        </div>
+
+                        <!-- 用户消息 -->
+                        <div class="msg msg-user">
+                            <div class="msg-bubble">请问GW-9000网关支持哪些协议？</div>
+                            <div class="msg-time">14:30</div>
+                        </div>
+
+                        <!-- 客服消息 -->
+                        <div class="msg msg-admin">
+                            <div class="msg-bubble">您好，GW-9000网关支持Modbus RTU/TCP、MQTT、OPC UA、Profinet、EtherNet/IP等20+工业协议，具体可参考产品手册中的协议列表。</div>
+                            <div class="msg-time">14:32</div>
+                        </div>
+
+                        <!-- 用户消息 -->
+                        <div class="msg msg-user">
+                            <div class="msg-bubble">是否支持自定义协议开发？</div>
+                            <div class="msg-time">14:35</div>
+                        </div>
+
+                        <!-- 客服消息 -->
+                        <div class="msg msg-admin">
+                            <div class="msg-bubble">支持的，我们提供SDK开发包，可基于网关的开放接口进行自定义协议的开发与集成，同时也可提供定制化开发服务。</div>
+                            <div class="msg-time">14:36</div>
+                        </div>
+                    </div>
+
+                    <!-- 对话输入区 -->
+                    <div class="chat-input">
+                        <form id="messageForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="msgInput" placeholder="请输入您的问题..." required>
+                                <button type="submit" class="btn btn-send ms-2"><i class="bi bi-send me-2"></i>发送</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">1991科技</h5>
+                    <p>专注于智能硬件与软件解决方案的研发与服务，致力于为客户创造价值。</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-weixin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-weibo"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">首页</a></li>
+                        <li><a href="user-center.html" class="text-white text-decoration-none">用户中心</a></li>
+                        <li><a href="help-center.html" class="text-white text-decoration-none">帮助中心</a></li>
+                        <li><a href="recruit.html" class="text-white text-decoration-none">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">联系我们</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>西安市长安区科技园100号</li>
+                        <li><i class="bi bi-phone me-2"></i>400-123-4567</li>
+                        <li><i class="bi bi-envelope me-2"></i>contact@company.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top mt-4 pt-4 text-center text-white-50">
+                <p>© 2025 1991科技有限公司 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 留言提交功能
+        const messageForm = document.getElementById('messageForm');
+        const msgInput = document.getElementById('msgInput');
+        const chatContent = document.getElementById('chatContent');
+
+        messageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msgText = msgInput.value.trim();
+            if (!msgText) return;
+
+            // 添加用户消息
+            const userMsg = `
+                <div class="msg msg-user">
+                    <div class="msg-bubble">${msgText}</div>
+                    <div class="msg-time">${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}</div>
+                </div>
+            `;
+            chatContent.insertAdjacentHTML('beforeend', userMsg);
+
+            // 清空输入框
+            msgInput.value = '';
+
+            // 滚动到底部
+            chatContent.scrollTop = chatContent.scrollHeight;
+
+            // 模拟客服回复
+            setTimeout(() => {
+                const adminReplies = [
+                    '您的问题我们已经收到，将尽快为您解答！',
+                    '感谢您的咨询，相关信息已为您记录，客服人员会在工作日与您联系。',
+                    '您好，您的问题需要技术人员核实后回复，请您耐心等待。'
+                ];
+                const randomReply = adminReplies[Math.floor(Math.random() * adminReplies.length)];
+                
+                const adminMsg = `
+                    <div class="msg msg-admin">
+                        <div class="msg-bubble">${randomReply}</div>
+                        <div class="msg-time">${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}</div>
+                    </div>
+                `;
+                chatContent.insertAdjacentHTML('beforeend', adminMsg);
+
+                // 滚动到底部
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

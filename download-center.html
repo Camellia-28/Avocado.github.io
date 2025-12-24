@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载中心 - 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        /* 布局容器 */
+        .download-container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+        /* 左侧抽屉分类 */
+        .category-drawer {
+            width: 260px;
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            transition: all 0.3s;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .drawer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-item {
+            margin-bottom: 5px;
+        }
+        .category-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .category-link:hover, .category-link.active {
+            background-color: #e7f5ff;
+            color: #003366;
+        }
+        .category-link i {
+            margin-right: 10px;
+            font-size: 0.9rem;
+            color: #003366;
+        }
+        /* 右侧内容区 */
+        .content-area {
+            flex: 1;
+            padding: 30px;
+        }
+        /* 搜索栏 */
+        .search-bar {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .filter-group {
+            display: flex;
+            gap: 10px;
+        }
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        /* 文件列表 */
+        .file-list {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        .file-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            background-color: #f9fafb;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .file-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .file-item:hover {
+            background-color: #f9fafb;
+        }
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #e7f5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        .file-icon i {
+            font-size: 1.2rem;
+            color: #003366;
+        }
+        .file-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .file-desc {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        .file-size, .file-date {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+        .file-action {
+            text-align: center;
+        }
+        .download-btn {
+            padding: 8px 15px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .download-btn:hover {
+            background-color: #004080;
+        }
+        /* 下载进度条 */
+        .download-progress {
+            height: 4px;
+            background-color: #eee;
+            border-radius: 2px;
+            margin-top: 10px;
+            display: none;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #003366;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .download-container {
+                flex-direction: column;
+            }
+            .category-drawer {
+                width: 100%;
+                height: auto;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .file-header, .file-item {
+                grid-template-columns: 2fr 1fr;
+                gap: 10px;
+            }
+            .file-size {
+                display: none;
+            }
+            .file-date {
+                text-align: left;
+            }
+            .file-action {
+                grid-column: span 2;
+                text-align: left;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #003366;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="download-center.html">下载中心</a></li>
+                    <li class="nav-item"><a class="nav-link" href="help-center.html">帮助中心</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体布局 -->
+    <div class="download-container">
+        <!-- 左侧分类抽屉 -->
+        <div class="category-drawer">
+            <div class="drawer-title"><i class="bi bi-download me-2"></i>文件分类</div>
+            <ul class="category-list">
+                <li class="category-item">
+                    <a href="#" class="category-link active" data-category="product">
+                        <i class="bi bi-box"></i>产品手册
+                    </a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-link" data-category="tech">
+                        <i class="bi bi-code"></i>技术文档
+                    </a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-link" data-category="driver">
+                        <i class="bi bi-cpu"></i>驱动程序
+                    </a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-link" data-category="case">
+                        <i class="bi bi-file-earmark-text"></i>案例文档
+                    </a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-link" data-category="software">
+                        <i class="bi bi-window"></i>软件工具
+                    </a>
+                </li>
+                <li class="category-item">
+                    <a href="#" class="category-link" data-category="other">
+                        <i class="bi bi-file-earmark"></i>其他文件
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 右侧内容区 -->
+        <div class="content-area">
+            <!-- 搜索栏 -->
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="搜索文件名、关键词...">
+                <div class="filter-group">
+                    <select class="filter-select" id="formatFilter">
+                        <option value="all">所有格式</option>
+                        <option value="pdf">PDF</option>
+                        <option value="docx">Word</option>
+                        <option value="zip">压缩包</option>
+                        <option value="exe">安装包</option>
+                    </select>
+                    <select class="filter-select" id="dateFilter">
+                        <option value="all">所有时间</option>
+                        <option value="month">近一个月</option>
+                        <option value="quarter">近三个月</option>
+                        <option value="year">近一年</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 文件列表 -->
+            <div class="file-list">
+                <div class="file-header">
+                    <div>文件名称</div>
+                    <div>文件大小</div>
+                    <div>更新时间</div>
+                    <div>操作</div>
+                </div>
+
+                <!-- 文件项1 -->
+                <div class="file-item" data-category="product" data-format="pdf">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="bi bi-file-pdf"></i></div>
+                        <div>
+                            <div class="file-name">GW-9000智能网关产品手册.pdf</div>
+                            <div class="file-desc">包含产品参数、安装说明、使用教程</div>
+                        </div>
+                    </div>
+                    <div class="file-size">8.5MB</div>
+                    <div class="file-date">2025-05-20</div>
+                    <div class="file-action">
+                        <button class="download-btn" onclick="startDownload(this)">
+                            <i class="bi bi-download"></i> 下载
+                        </button>
+                        <div class="download-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件项2 -->
+                <div class="file-item" data-category="tech" data-format="pdf">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="bi bi-file-pdf"></i></div>
+                        <div>
+                            <div class="file-name">工业物联网平台API文档.pdf</div>
+                            <div class="file-desc">平台接口说明、调用示例、错误码</div>
+                        </div>
+                    </div>
+                    <div class="file-size">5.2MB</div>
+                    <div class="file-date">2025-04-15</div>
+                    <div class="file-action">
+                        <button class="download-btn" onclick="startDownload(this)">
+                            <i class="bi bi-download"></i> 下载
+                        </button>
+                        <div class="download-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件项3 -->
+                <div class="file-item" data-category="driver" data-format="zip">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="bi bi-file-zip"></i></div>
+                        <div>
+                            <div class="file-name">GW-9000驱动程序包.zip</div>
+                            <div class="file-desc">Windows/Linux驱动程序及安装说明</div>
+                        </div>
+                    </div>
+                    <div class="file-size">28.7MB</div>
+                    <div class="file-date">2025-03-10</div>
+                    <div class="file-action">
+                        <button class="download-btn" onclick="startDownload(this)">
+                            <i class="bi bi-download"></i> 下载
+                        </button>
+                        <div class="download-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件项4 -->
+                <div class="file-item" data-category="software" data-format="exe">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="bi bi-file-exe"></i></div>
+                        <div>
+                            <div class="file-name">设备配置工具V2.0.exe</div>
+                            <div class="file-desc">智能网关参数配置工具</div>
+                        </div>
+                    </div>
+                    <div class="file-size">45.3MB</div>
+                    <div class="file-date">2025-02-28</div>
+                    <div class="file-action">
+                        <button class="download-btn" onclick="startDownload(this)">
+                            <i class="bi bi-download"></i> 下载
+                        </button>
+                        <div class="download-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件项5 -->
+                <div class="file-item" data-category="case" data-format="docx">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="bi bi-file-word"></i></div>
+                        <div>
+                            <div class="file-name">智能制造解决方案案例.docx</div>
+                            <div class="file-desc">汽车制造车间智能化改造案例</div>
+                        </div>
+                    </div>
+                    <div class="file-size">2.8MB</div>
+                    <div class="file-date">2025-01-18</div>
+                    <div class="file-action">
+                        <button class="download-btn" onclick="startDownload(this)">
+                            <i class="bi bi-download"></i> 下载
+                        </button>
+                        <div class="download-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer style="background-color: #003366; color: white; padding: 30px 0; text-align: center; margin-top: 30px;">
+        <div class="container">
+            <p>1991科技 © 2025 版权所有 | 下载说明：部分文件需登录后下载 | 技术支持：400-123-4567</p>
+        </div>
+    </footer>
+
+    <script>
+        // 下载进度模拟
+        function startDownload(btn) {
+            const progressContainer = btn.nextElementSibling;
+            const progressBar = progressContainer.querySelector('.progress-bar');
+            
+            // 显示进度条
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            
+            // 禁用按钮
+            btn.disabled = true;
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> 下载中...';
+            
+            // 模拟下载进度
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 10);
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // 下载完成
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="bi bi-check"></i> 下载完成';
+                        setTimeout(() => {
+                            btn.innerHTML = '<i class="bi bi-download"></i> 下载';
+                            btn.disabled = false;
+                            progressContainer.style.display = 'none';
+                            progressBar.style.width = '0%';
+                        }, 2000);
+                    }, 500);
+                }
+                progressBar.style.width = `${progress}%`;
+            }, 300);
+        }
+
+        // 分类筛选
+        const categoryLinks = document.querySelectorAll('.category-link');
+        const fileItems = document.querySelectorAll('.file-item');
+        
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 切换激活状态
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // 筛选文件
+                fileItems.forEach(item => {
+                    if (item.getAttribute('data-category') === category) {
+                        item.style.display = 'grid';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 格式筛选
+        const formatFilter = document.getElementById('formatFilter');
+        formatFilter.addEventListener('change', function() {
+            const format = this.value;
+            
+            fileItems.forEach(item => {
+                if (format === 'all' || item.getAttribute('data-format') === format) {
+                    item.style.display = 'grid';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

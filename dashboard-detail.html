@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备监控大屏 - 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+        }
+        /* 顶部导航（极简暗黑） */
+        .dash-header {
+            background-color: #1e293b;
+            padding: 15px 20px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dash-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #60a5fa;
+        }
+        .dash-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .filter-select {
+            background-color: #334155;
+            border: none;
+            color: #e2e8f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        /* 仪表盘容器 */
+        .dash-container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: 15px;
+            height: calc(100vh - 70px);
+        }
+        /* 数据卡片 */
+        .data-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .card-title {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        /* 卡片布局 */
+        .card-1 { /* 总览卡片 */
+            grid-column: span 3;
+            grid-row: span 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-2 { /* 在线设备图表 */
+            grid-column: span 5;
+            grid-row: span 2;
+        }
+        .card-3 { /* 告警统计 */
+            grid-column: span 4;
+            grid-row: span 2;
+        }
+        .card-4 { /* 数据采集趋势 */
+            grid-column: span 8;
+            grid-row: span 1;
+        }
+        /* 数据数值样式 */
+        .data-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin: 5px 0;
+        }
+        .data-unit {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        /* 告警标签 */
+        .alert-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .alert-critical {
+            background-color: #ef4444;
+            color: white;
+        }
+        .alert-warning {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .alert-info {
+            background-color: #3b82f6;
+            color: white;
+        }
+        /* 响应式适配 */
+        @media (max-width: 1200px) {
+            .dash-container {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            .card-1 { grid-column: span 2; }
+            .card-2 { grid-column: span 3; }
+            .card-3 { grid-column: span 3; }
+            .card-4 { grid-column: span 6; }
+        }
+        @media (max-width: 768px) {
+            .dash-container {
+                grid-template-columns: repeat(1, 1fr);
+                height: auto;
+            }
+            .card-1, .card-2, .card-3, .card-4 {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="dash-header">
+        <div class="dash-title"><i class="bi bi-speedometer2 me-2"></i>设备监控大屏 - 智能制造车间</div>
+        <div class="dash-controls">
+            <select class="filter-select" id="timeFilter">
+                <option value="1h">近1小时</option>
+                <option value="6h" selected>近6小时</option>
+                <option value="24h">近24小时</option>
+                <option value="7d">近7天</option>
+            </select>
+            <button class="btn btn-sm" style="background-color: #3b82f6; color: white;">
+                <i class="bi bi-download me-1"></i>导出数据
+            </button>
+        </div>
+    </div>
+
+    <!-- 仪表盘主体 -->
+    <div class="dash-container">
+        <!-- 总览卡片1：在线设备数 -->
+        <div class="data-card card-1">
+            <div class="card-title">在线设备数</div>
+            <div class="data-value">1286</div>
+            <div class="data-unit">台</div>
+            <div style="font-size: 0.8rem; color: #10b981;">↑ 2.3% 较昨日</div>
+        </div>
+
+        <!-- 总览卡片2：数据采集量 -->
+        <div class="data-card card-1">
+            <div class="card-title">数据采集量</div>
+            <div class="data-value">896</div>
+            <div class="data-unit">万条/小时</div>
+            <div style="font-size: 0.8rem; color: #10b981;">↑ 5.7% 较昨日</div>
+        </div>
+
+        <!-- 总览卡片3：设备故障率 -->
+        <div class="data-card card-1">
+            <div class="card-title">设备故障率</div>
+            <div class="data-value">1.8</div>
+            <div class="data-unit">%</div>
+            <div style="font-size: 0.8rem; color: #ef4444;">↑ 0.5% 较昨日</div>
+        </div>
+
+        <!-- 在线设备图表 -->
+        <div class="data-card card-2">
+            <div class="card-title">
+                设备在线率趋势
+                <i class="bi bi-gear text-gray-400 cursor-pointer" style="font-size: 0.8rem;"></i>
+            </div>
+            <div style="height: 250px;">
+                <canvas id="onlineChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 告警统计 -->
+        <div class="data-card card-3">
+            <div class="card-title">
+                告警统计
+                <span style="font-size: 0.8rem;">共28条</span>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <span class="alert-tag alert-critical">紧急告警 (6)</span>
+                <span class="alert-tag alert-warning">警告告警 (12)</span>
+                <span class="alert-tag alert-info">信息告警 (10)</span>
+            </div>
+            <div style="height: 200px;">
+                <canvas id="alertChart"></canvas>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.8rem;">
+                <div class="mb-1"><i class="bi bi-exclamation-circle text-red-500 me-1"></i> 紧急告警：设备108# 温度超限</div>
+                <div class="mb-1"><i class="bi bi-exclamation-triangle text-yellow-500 me-1"></i> 警告告警：设备215# 电压不稳</div>
+                <div><i class="bi bi-info-circle text-blue-500 me-1"></i> 信息告警：设备302# 维护提醒</div>
+            </div>
+        </div>
+
+        <!-- 数据采集趋势 -->
+        <div class="data-card card-4">
+            <div class="card-title">
+                数据采集量趋势
+                <select class="filter-select" style="font-size: 0.7rem; padding: 2px 5px;" id="dataTypeFilter">
+                    <option value="all">全部数据</option>
+                    <option value="temperature">温度数据</option>
+                    <option value="pressure">压力数据</option>
+                </select>
+            </div>
+            <div style="height: 150px;">
+                <canvas id="dataTrendChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化在线率图表
+        const onlineCtx = document.getElementById('onlineChart').getContext('2d');
+        const onlineChart = new Chart(onlineCtx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'],
+                datasets: [{
+                    label: '在线设备数',
+                    data: [1278, 1280, 1275, 1282, 1285, 1283, 1286],
+                    borderColor: '#60a5fa',
+                    backgroundColor: 'rgba(96, 165, 250, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false, color: '#334155' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // 初始化告警图表
+        const alertCtx = document.getElementById('alertChart').getContext('2d');
+        const alertChart = new Chart(alertCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['紧急告警', '警告告警', '信息告警'],
+                datasets: [{
+                    data: [6, 12, 10],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#94a3b8', font: { size: 10 } }
+                    }
+                }
+            }
+        });
+
+        // 初始化数据趋势图表
+        const trendCtx = document.getElementById('dataTrendChart').getContext('2d');
+        const trendChart = new Chart(trendCtx, {
+            type: 'bar',
+            data: {
+                labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'],
+                datasets: [{
+                    label: '数据采集量（万条）',
+                    data: [850, 865, 872, 880, 890, 885, 896],
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false, color: '#334155' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // 模拟实时数据更新
+        setInterval(() => {
+            // 随机更新在线设备数
+            const randomNum = Math.floor(Math.random() * 5) - 2;
+            const newOnline = 1286 + randomNum;
+            document.querySelector('.card-1 .data-value').textContent = newOnline;
+            
+            // 更新图表数据
+            onlineChart.data.datasets[0].data.shift();
+            onlineChart.data.datasets[0].data.push(newOnline);
+            onlineChart.update();
+        }, 5000);
+    </script>
+</body>
+</html>

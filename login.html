@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录 - 1991科技</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+        }
+        /* 登录卡片样式 */
+        .login-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 51, 102, 0.08);
+            overflow: hidden;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        /* 品牌头部 */
+        .login-header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        /* 表单区域 */
+        .login-body {
+            padding: 30px;
+        }
+        /* 自定义按钮样式 */
+        .btn-login {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #004080;
+            color: white;
+        }
+        /* 链接样式 */
+        .login-link {
+            color: #003366;
+            text-decoration: none;
+        }
+        .login-link:hover {
+            color: #004080;
+            text-decoration: underline;
+        }
+        /* 表单验证提示 */
+        .invalid-feedback {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="py-5">
+    <div class="container">
+        <!-- 登录卡片 -->
+        <div class="card login-card">
+            <!-- 品牌头部 -->
+            <div class="login-header">
+                <h4 class="mb-0">1991科技用户登录</h4>
+                <p class="mb-0 text-white-50 small">欢迎使用企业管理系统</p>
+            </div>
+            <!-- 登录表单 -->
+            <div class="login-body">
+                <form id="loginForm" novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">账号/手机号/邮箱</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="username" placeholder="请输入账号" required>
+                            <div class="invalid-feedback">
+                                请输入有效的账号
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">密码</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="请输入密码" required>
+                            <button type="button" class="btn btn-outline-secondary" id="togglePwd">
+                                <i class="bi bi-eye-slash" id="pwdIcon"></i>
+                            </button>
+                            <div class="invalid-feedback">
+                                请输入密码
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberPwd">
+                            <label class="form-check-label small" for="rememberPwd">
+                                记住密码（7天）
+                            </label>
+                        </div>
+                        <a href="forgot-pwd.html" class="login-link small">忘记密码？</a>
+                    </div>
+                    <button type="submit" class="btn-login mb-3">登 录</button>
+                    <div class="text-center">
+                        <span class="small text-muted">还没有账号？</span>
+                        <a href="register.html" class="login-link small">立即注册</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 密码显示/隐藏切换
+        const togglePwd = document.getElementById('togglePwd');
+        const password = document.getElementById('password');
+        const pwdIcon = document.getElementById('pwdIcon');
+
+        togglePwd.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // 切换图标
+            pwdIcon.classList.toggle('bi-eye');
+            pwdIcon.classList.toggle('bi-eye-slash');
+        });
+
+        // 表单验证
+        const loginForm = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止默认提交
+
+            // 表单验证
+            if (!loginForm.checkValidity()) {
+                loginForm.classList.add('was-validated');
+                return;
+            }
+
+            // 获取表单数据
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const rememberPwd = document.getElementById('rememberPwd').checked;
+
+            // 模拟登录请求（实际项目中替换为后端接口调用）
+            console.log('登录信息：', { username, password, rememberPwd });
+            
+            // 模拟登录成功
+            alert('登录成功！即将跳转到首页');
+            window.location.href = 'index.html';
+
+            // 若需记住密码，可将账号密码存储到localStorage
+            if (rememberPwd) {
+                localStorage.setItem('savedUsername', username);
+                localStorage.setItem('savedPassword', btoa(password)); // 简单加密（实际项目需更安全的方式）
+                localStorage.setItem('rememberPwdExpire', new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime());
+            } else {
+                localStorage.removeItem('savedUsername');
+                localStorage.removeItem('savedPassword');
+                localStorage.removeItem('rememberPwdExpire');
+            }
+        });
+
+        // 页面加载时填充记住的密码
+        window.addEventListener('load', function() {
+            const savedUsername = localStorage.getItem('savedUsername');
+            const savedPassword = localStorage.getItem('savedPassword');
+            const expireTime = localStorage.getItem('rememberPwdExpire');
+
+            if (savedUsername && savedPassword && expireTime && Date.now() < expireTime) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('password').value = atob(savedPassword); // 解密
+                document.getElementById('rememberPwd').checked = true;
+            }
+        });
+    </script>
+</body>
+</html>

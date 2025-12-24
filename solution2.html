@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧家居解决方案 - 1991科技解决方案中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; }
+        .navbar { background-color: #003366; }
+        .footer { background-color: #003366; color: white; padding: 30px 0; margin-top: 50px; }
+        .page-header { background: linear-gradient(135deg, #003366 0%, #006699 100%); color: white; padding: 40px 0; }
+        .solution-card { border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .solution-card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">1991科技</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product1.html">产品中心</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="solution1.html">解决方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">新闻动态</a></li>
+					<li class="nav-item"><a class="nav-link" href="recruit.html">加入我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>解决方案</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 bg-transparent">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-white">首页</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">智慧家居</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- 解决方案导航 -->
+    <section class="py-3 bg-light">
+        <div class="container">
+            <ul class="nav nav-pills justify-content-center flex-wrap">
+                <li class="nav-item mb-2 mb-md-0"><a class="nav-link" href="solution1.html">智能工厂</a></li>
+                <li class="nav-item mb-2 mb-md-0"><a class="nav-link active" href="solution2.html">智慧家居</a></li>
+                <li class="nav-item mb-2 mb-md-0"><a class="nav-link" href="solution3.html">智慧城市</a></li>
+                <li class="nav-item mb-2 mb-md-0"><a class="nav-link" href="solution4.html">新能源监控</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 解决方案详情 -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4 align-items-center mb-5">
+                <div class="col-md-6">
+                    <h2 class="mb-4">智慧家居整体解决方案</h2>
+                    <p class="text-muted mb-4">1991科技智慧家居解决方案基于物联网、人工智能、大数据等技术，打造集智能控制、环境监测、安全防护、能源管理于一体的全屋智能系统，为用户提供安全、舒适、便捷、节能的家居生活体验。</p>
+                    <p class="text-muted mb-4">方案支持语音控制、手机APP控制、场景联动等多种控制方式，兼容主流智能家居协议和设备，可根据用户需求定制个性化的智能场景。</p>
+                    <h4 class="h6 mb-3">方案价值</h4>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><i class="bi bi-shield-check text-primary me-2"></i>提升家居安全等级，降低安全事故风险</li>
+                        <li class="mb-2"><i class="bi bi-emoji-smile text-primary me-2"></i>打造舒适便捷的生活体验，解放双手</li>
+                        <li class="mb-2"><i class="bi bi-lightning-charge text-primary me-2"></i>实现能源智能管理，降低家庭能耗10-20%</li>
+                        <li class="mb-2"><i class="bi bi-puzzle text-primary me-2"></i>开放兼容，支持海量设备接入和扩展</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary">咨询方案详情</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://picsum.photos/600/400?random=160" class="img-fluid rounded shadow" alt="智慧家居解决方案">
+                </div>
+            </div>
+
+            <!-- 方案架构 -->
+            <div class="row mt-5 mb-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-5">方案架构</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="solution-card h-100 text-center p-4">
+                                <i class="bi bi-lightbulb text-primary display-4 mb-3"></i>
+                                <h4 class="h5 mb-3">感知层</h4>
+                                <p class="text-muted">通过温湿度、人体感应、门窗磁、烟雾传感器等设备感知家居环境状态</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="solution-card h-100 text-center p-4">
+                                <i class="bi bi-router text-primary display-4 mb-3"></i>
+                                <h4 class="h5 mb-3">网络层</h4>
+                                <p class="text-muted">通过WiFi、蓝牙、ZigBee等无线通信技术实现设备互联互通</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="solution-card h-100 text-center p-4">
+                                <i class="bi bi-phone text-primary display-4 mb-3"></i>
+                                <h4 class="h5 mb-3">应用层</h4>
+                                <p class="text-muted">通过手机APP、语音助手、控制面板等实现设备控制和场景管理</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心功能 -->
+            <div class="row mt-5 mb-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-5">核心功能</h3>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 p-4">
+                                <h4 class="h5 mb-3"><i class="bi bi-lock text-primary me-2"></i>智能安防</h4>
+                                <p class="text-muted">集成门窗磁、人体红外、烟雾报警器、燃气报警器等设备，实现异常情况实时报警和远程查看，保障家居安全。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 p-4">
+                                <h4 class="h5 mb-3"><i class="bi bi-thermostat text-primary me-2"></i>环境智能调节</h4>
+                                <p class="text-muted">根据室内温湿度、光照等环境参数，自动调节空调、加湿器、窗帘等设备，保持舒适的家居环境。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 p-4">
+                                <h4 class="h5 mb-3"><i class="bi bi-volume-up text-primary me-2"></i>语音控制</h4>
+                                <p class="text-muted">支持天猫精灵、小爱同学、小度等主流语音助手，通过语音指令实现设备控制和场景切换。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 p-4">
+                                <h4 class="h5 mb-3"><i class="bi bi-scenario text-primary me-2"></i>场景联动</h4>
+                                <p class="text-muted">支持自定义场景模式，如起床模式、睡眠模式、离家模式、回家模式等，一键触发多个设备联动。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 成功案例 -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-5">成功案例</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="https://picsum.photos/400/300?random=170" class="card-img-top" alt="高端住宅智慧家居案例">
+                                <div class="card-body">
+                                    <h4 class="h6 mb-3">高端住宅全屋智能改造</h4>
+                                    <p class="text-muted small">为高端住宅小区500户业主提供全屋智能解决方案，实现智能安防、环境调节、语音控制等功能。</p>
+                                    <a href="case4.html" class="btn btn-sm btn-primary mt-2">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="https://picsum.photos/400/300?random=171" class="card-img-top" alt="别墅智慧家居案例">
+                                <div class="card-body">
+                                    <h4 class="h6 mb-3">别墅智慧家居定制</h4>
+                                    <p class="text-muted small">为独栋别墅定制个性化智慧家居系统，集成智能影音、智能安防、能源管理等功能。</p>
+                                    <a href="case5.html" class="btn btn-sm btn-primary mt-2">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="https://picsum.photos/400/300?random=172" class="card-img-top" alt="公寓智慧家居案例">
+                                <div class="card-body">
+                                    <h4 class="h6 mb-3">公寓楼智能升级</h4>
+                                    <p class="text-muted small">为公寓楼实现公共区域和户内智能改造，提升居住体验和物业管理效率。</p>
+                                    <a href="case6.html" class="btn btn-sm btn-primary mt-2">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">1991科技</h5>
+                    <p>专注于智能硬件与软件解决方案的研发与服务，致力于为客户创造价值。</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-weixin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-weibo"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">首页</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">关于我们</a></li>
+                        <li><a href="product1.html" class="text-white text-decoration-none">产品中心</a></li>
+                        <li><a href="news.html" class="text-white text-decoration-none">新闻动态</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">联系我们</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>西安市长安区科技园100号</li>
+                        <li><i class="bi bi-phone me-2"></i>400-123-4567</li>
+                        <li><i class="bi bi-envelope me-2"></i>contact@company.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top mt-4 pt-4 text-center text-white-50">
+                <p>© 2025 1991科技有限公司 版权所有 | 陕ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
